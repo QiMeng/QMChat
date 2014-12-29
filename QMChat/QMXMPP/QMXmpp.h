@@ -20,7 +20,6 @@
 #import "XMPPCapabilitiesCoreDataStorage.h"
 #import "XMPPCapabilities.h"
 
-
 #define QMXmppShare [QMXmpp sharedManager]
 
 //presence 的状态：
@@ -143,6 +142,9 @@ typedef enum
  *  @param type  消息类型
  *  @param body  消息体
  *  @param toJid 发送对象
+ *
+ *  ex:[QMXmppShare xmppSendMessageType:@"chat" Body:@"发送消息" toJID:<#XMPPJID#>];
+ *
  */
 - (void)xmppSendMessageType:(NSString *)type Body:(NSString *)body toJID:(XMPPJID *)toJid;
 

@@ -31,6 +31,15 @@
 
 - (void)getData{
 
+    
+    //发送消息
+    NSArray * friends = [[QMXmpp sharedManager] xmppAllFriendList];
+    XMPPUserCoreDataStorageObject *object = [friends lastObject];
+    [QMXmppShare xmppSendMessageType:@"chat" Body:@"发送消息" toJID:object.jid];
+    
+    
+    
+//  消息列表
 //    NSManagedObjectContext *context = [[QMXmpp sharedManager].xmppMessageArchivingCoreDataStorage mainThreadManagedObjectContext];
 //    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject" inManagedObjectContext:context];
 //    NSFetchRequest *request = [[NSFetchRequest alloc]init];
@@ -42,16 +51,9 @@
 //    for (XMPPMessageArchiving_Message_CoreDataObject *obj in messages) {
 //        NSLog(@"%@:%@",obj.bareJidStr,obj.body);
 //    }
+
     
-    NSArray * friends = [[QMXmpp sharedManager] xmppAllFriendList];
-    
-    XMPPUserCoreDataStorageObject *object = [friends lastObject];
-    
-    XMPPMessage *message = [XMPPMessage messageWithType:@"chat" to:object.jid];
-    [message addBody:@"asdasdf"];
-    [[QMXmppShare xmppStream] sendElement:message];
-    
-    
+//  好友列表
 //    NSArray * friends = [[QMXmpp sharedManager] xmppAllFriendList];
 //    for (XMPPUserCoreDataStorageObject *object in friends) {
 //        
