@@ -8,10 +8,7 @@
 
 #import "QMXmpp.h"
 
-
-
-
-#define kHostName @"10.10.0.35"
+#define kHostName @"10.10.0.138"
 #define kHostPort 5222
 
 @interface QMXmpp()
@@ -29,6 +26,8 @@
     dispatch_once(&predicate, ^{
         if (!sharedInstance) {
             sharedInstance = [[QMXmpp alloc] init];
+            sharedInstance.hostName = @"10.10.0.138";
+            sharedInstance.domain = @"qimeng";
         }
     });
     return sharedInstance;
@@ -73,14 +72,16 @@
     
     if (![self.xmppStream isConnected]) {
         
-        XMPPJID *jid = [XMPPJID jidWithUser:aUserName domain:kHostName resource:aResource];
+        _password = aPassWord;
+        
+        XMPPJID *jid = [XMPPJID jidWithUser:aUserName domain:_domain resource:aResource];
         [self.xmppStream setMyJID:jid];
-        [self.xmppStream setHostName:kHostName];
+        [self.xmppStream setHostName:_hostName];
         NSError *error = nil;
-        if (![self.xmppStream connectWithTimeout:1 error:&error]) {
+        if (![self.xmppStream connectWithTimeout:30 error:&error]) {
             NSLog(@"Connect Error: %@", [[error userInfo] description]);
         }
-        password = aPassWord;
+        
     }
 }
 
@@ -90,7 +91,7 @@
     NSError *error = nil;
     
     NSLog(@"连接服务器成功");
-    if (![self.xmppStream authenticateWithPassword:password error:&error]) {
+    if (![self.xmppStream authenticateWithPassword:_password error:&error]) {
         NSLog(@"Authenticate Error: %@", [[error userInfo] description]);
     }
 }
@@ -106,11 +107,25 @@
 }
 
 
+#pragma mark - 获取全部好友列表
+- (NSArray *)xmppAllFriendList {
+    
+    NSManagedObjectContext *context = [[self xmppRosterStorage_CoreData] mainThreadManagedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setEntity:entity];
+    NSError *error ;
+    NSArray *friends = [context executeFetchRequest:request error:&error];
+    
+    
+    return friends;
+}
 
 #pragma mark - 断开连接
 - (void)disconnect {
     [self presenceStype:PresenceStyleUnavailable];
     [_xmppStream disconnect];
+    _password = @"";
 }
 
 #pragma mark - 改变在线状态

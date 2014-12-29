@@ -35,12 +35,15 @@ typedef enum
 }PresenceStyle;
 
 
-@interface QMXmpp : NSObject {
-    
-    NSString * userName;
-    NSString * password;
-    
-}
+@interface QMXmpp : NSObject 
+
+@property (nonatomic, copy) NSString * hostName;    //主机ip地址
+@property (nonatomic, copy) NSString * domain;      //服务器名
+
+@property (nonatomic, copy) NSString * userName;    //用户名
+@property (nonatomic, copy) NSString * password;    //密码
+@property (nonatomic, copy) NSString * resource;    //资源id
+
 
 @property (nonatomic, strong) XMPPStream *xmppStream;
 
@@ -63,6 +66,21 @@ typedef enum
 - (void)loginXMPPUserName:(NSString *)aUserName
                  password:(NSString *)aPassWord
                  resource:(NSString *)aResource;
+
+
+/**
+ *  获取全部好友列表
+ *
+ *  @return 好友列表 < XMPPUserCoreDataStorageObject >
+ */
+- (NSArray *)xmppAllFriendList;
+
+
+
+/**
+ *  退出登录
+ */
+- (void)disconnect;
 
 
 @end

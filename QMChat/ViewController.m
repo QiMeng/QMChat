@@ -28,24 +28,22 @@
 
 
 - (void)getData{
-    NSManagedObjectContext *context = [[[QMXmpp sharedManager] xmppRosterStorage_CoreData] mainThreadManagedObjectContext];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
-    NSFetchRequest *request = [[NSFetchRequest alloc]init];
-    [request setEntity:entity];
-    NSError *error ;
-    NSArray *friends = [context executeFetchRequest:request error:&error];
     
-
+    NSArray * friends = [[QMXmpp sharedManager] xmppAllFriendList];
     for (XMPPUserCoreDataStorageObject *object in friends) {
-        NSString *name = [object displayName];
-        if (!name) {
-            name = [object nickname];
-        }
-        if (!name) {
-            name = [object jidStr];
-        }
         
-        NSLog(@"name : %@",name);
+        NSLog(@"displayName:%@ jidStr:%@ streamBareJidStr:%@ nickname:%@ subscription:%@ ask:%@ unreadMessages:%@ photo:%@ section:%ld sectionName:%@ sectionNum:%d",
+              object.displayName,
+              object.jidStr,
+              object.streamBareJidStr,
+              object.nickname,
+              object.subscription,
+              object.ask,
+              object.unreadMessages,
+              object.photo,
+              object.section,
+              object.sectionName,
+              [object.sectionNum intValue]);
 
     }
     
