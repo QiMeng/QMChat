@@ -7,8 +7,10 @@
 //
 
 #import "FriendsViewController.h"
-
+#import "QMXmpp.h"
 @interface FriendsViewController () <UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, strong) NSArray * friends;
 
 @end
 
@@ -18,6 +20,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _friends = [QMXmppShare xmppAllFriendList];
+    
+    myTableView.tableFooterView = [UIView new];
+    
     [myTableView reloadData];
     
 }
@@ -25,7 +31,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     
-    return 5;
+    return _friends.count;
     
 }
 
@@ -34,8 +40,9 @@
     
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"FriendCell" forIndexPath:indexPath];
     
-    cell.textLabel.text = @"adsf";
+    XMPPUserCoreDataStorageObject *object = _friends[indexPath.row];
     
+    cell.textLabel.text = object.displayName;
     
     return cell;
 }

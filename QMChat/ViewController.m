@@ -12,8 +12,6 @@
 #import <RACEXTScope.h>
 #import <SVProgressHUD.h>
 
-
-
 @interface ViewController () <QMXmppDelegate>
 
 @end
@@ -37,8 +35,7 @@
                                               reduce:^(NSString *user, NSString * pwd){
                                                   return  @(user.length > 0 && pwd.length > 0);
                                               }];
-    
-    
+
 //    [self fetchedResultsController];
 //
 //    [self performSelector:@selector(getData) withObject:nil afterDelay:5];
@@ -70,8 +67,9 @@
 - (void)qmXMPPLoginSuccess:(id)sender{
     [SVProgressHUD showSuccessWithStatus:@"登录成功"];
     
+     [self performSelector:@selector(getData) withObject:nil afterDelay:5];
     
-    [self performSegueWithIdentifier:@"FriendsViewController" sender:nil];
+//    [self performSegueWithIdentifier:@"FriendsViewController" sender:nil];
 }
 
 /**
@@ -96,15 +94,14 @@
 }
 
 
-
-
 - (void)getData{
 
+    [self performSegueWithIdentifier:@"FriendsViewController" sender:nil];
     
     //发送消息
-    NSArray * friends = [[QMXmpp sharedManager] xmppAllFriendList];
-    XMPPUserCoreDataStorageObject *object = [friends lastObject];
-    [QMXmppShare xmppSendMessageType:@"chat" Body:@"发送消息" toJID:object.jid];
+//    NSArray * friends = [[QMXmpp sharedManager] xmppAllFriendList];
+//    XMPPUserCoreDataStorageObject *object = [friends lastObject];
+//    [QMXmppShare xmppSendMessageType:@"chat" Body:@"发送消息" toJID:object.jid];
     
     
     
