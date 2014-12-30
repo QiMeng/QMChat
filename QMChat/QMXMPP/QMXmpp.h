@@ -41,12 +41,41 @@ typedef enum
 }PresenceStyle;
 
 
+@protocol QMXmppDelegate <NSObject>
+
+/**
+ *  连接服务器失败
+ */
+- (void)qmXMPPConnectedFail:(id)sender;
+
+/**
+ *  登录成功
+ */
+- (void)qmXMPPLoginSuccess:(id)sender;
+
+/**
+ *  登录失败
+ */
+- (void)qmXMPPLoginFail:(id)sender;
+
+/**
+ *  注册成功
+ */
+- (void)qmXMPPRegistrationSuccess:(id)sender;
+
+/**
+ *  注册失败
+ */
+- (void)qmXMPPRegistrationFail:(id)sender;
+
+@end
+
 @interface QMXmpp : NSObject  {
     
-    
-    BOOL isReg; //用于判断注册.还是登录; 
-    
+    BOOL isReg; //用于判断注册.还是登录;
 }
+
+@property (assign) id<QMXmppDelegate> delegate;
 
 @property (nonatomic, copy) NSString * hostName;    //主机ip地址
 @property (nonatomic, copy) NSString * domain;      //服务器名
@@ -66,7 +95,6 @@ typedef enum
 @property (nonatomic, strong) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 @property (nonatomic, strong) XMPPCapabilitiesCoreDataStorage * xmppCapabilitiesStorage;
 @property (nonatomic, strong) XMPPCapabilities *xmppCapabilities;
-
 
 @property (nonatomic, strong) XMPPMessageArchivingCoreDataStorage *xmppMessageArchivingCoreDataStorage;
 @property (nonatomic, strong) XMPPMessageArchiving *xmppMessageArchivingModule;

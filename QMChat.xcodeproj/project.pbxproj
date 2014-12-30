@@ -16,6 +16,7 @@
 		FF6B210F1A4D54BB00E00395 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF6B210E1A4D54BB00E00395 /* Images.xcassets */; };
 		FF6B21121A4D54BB00E00395 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF6B21101A4D54BB00E00395 /* LaunchScreen.xib */; };
 		FF6B211E1A4D54BB00E00395 /* QMChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6B211D1A4D54BB00E00395 /* QMChatTests.m */; };
+		FFAD4DF41A52379D0054C7F0 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD4DF31A52379D0054C7F0 /* FriendsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,8 @@
 		FF6B21171A4D54BB00E00395 /* QMChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QMChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6B211C1A4D54BB00E00395 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF6B211D1A4D54BB00E00395 /* QMChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMChatTests.m; sourceTree = "<group>"; };
+		FFAD4DF21A52379D0054C7F0 /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
+		FFAD4DF31A52379D0054C7F0 /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 				FF6B21061A4D54BB00E00395 /* AppDelegate.m */,
 				FF6B21081A4D54BB00E00395 /* ViewController.h */,
 				FF6B21091A4D54BB00E00395 /* ViewController.m */,
+				FFAD4DF21A52379D0054C7F0 /* FriendsViewController.h */,
+				FFAD4DF31A52379D0054C7F0 /* FriendsViewController.m */,
 				FF3A15BE1A4E4AB600DE0EA0 /* QMXMPP */,
 				FF6B210B1A4D54BB00E00395 /* Main.storyboard */,
 				FF6B210E1A4D54BB00E00395 /* Images.xcassets */,
@@ -291,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAD4DF41A52379D0054C7F0 /* FriendsViewController.m in Sources */,
 				FF6B210A1A4D54BB00E00395 /* ViewController.m in Sources */,
 				FF6B21071A4D54BB00E00395 /* AppDelegate.m in Sources */,
 				FF3A15C11A4E4B5800DE0EA0 /* QMXmpp.m in Sources */,

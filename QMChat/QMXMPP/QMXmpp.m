@@ -8,7 +8,7 @@
 
 #import "QMXmpp.h"
 
-#define kHostName @"10.10.0.138"
+#define kHostName @"10.10.0.138"//@"192.168.1.58"
 #define kHostPort 5222
 
 @interface QMXmpp()
@@ -26,7 +26,7 @@
     dispatch_once(&predicate, ^{
         if (!sharedInstance) {
             sharedInstance = [[QMXmpp alloc] init];
-            sharedInstance.hostName = @"10.10.0.138";
+            sharedInstance.hostName = kHostName;//@"10.10.0.138";
             sharedInstance.domain = @"qimeng";
         }
     });
@@ -169,6 +169,10 @@
     if (_xmppStream == nil) {
         [self setupStream];
     }
+    if ([_xmppStream isConnected]) {
+        [_xmppStream disconnect];
+    }
+    
     if (![_xmppStream isConnected]) {
         
         _userName = aUserName;
@@ -220,6 +224,12 @@
     if (_xmppStream == nil) {
         [self setupStream];
     }
+    
+    if ([_xmppStream isConnected]) {
+        [_xmppStream disconnect];
+    }
+    
+    
     if (![_xmppStream isConnected]) {
         
         _userName = aUserName;
@@ -235,7 +245,12 @@
         [_xmppStream setHostName:aHostName];
         NSError *error = nil;
         if (![self.xmppStream connectWithTimeout:30 error:&error]) {
-            NSLog(@"Connect Error: %@", [[error userInfo] description]);
+            
+            NSLog(@"连接 Error: %@", [[error userInfo] description]);
+            if (_delegate && [_delegate respondsToSelector:@selector(qmXMPPConnectedFail:)]) {
+                [_delegate qmXMPPConnectedFail:error];
+            }
+            
         }
     }
 }
@@ -259,6 +274,10 @@
 - (void)xmppStreamDidRegister:(XMPPStream *)sender
 {
     NSLog(@"注册成功");
+    if (_delegate && [_delegate respondsToSelector:@selector(qmXMPPRegistrationSuccess:)]) {
+        [_delegate qmXMPPRegistrationSuccess:sender];
+    }
+    
     NSError *error = nil;
     //注册成功之后直接登录
     if (![self.xmppStream authenticateWithPassword:_password error:&error]) {
@@ -269,17 +288,30 @@
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement *)error
 {
     NSLog(@"注册 Error: %@", [error description]);
+    if (_delegate && [_delegate respondsToSelector:@selector(qmXMPPRegistrationFail:)]) {
+        [_delegate qmXMPPRegistrationFail:error];
+    }
+    
 }
 #pragma mark - 身份验证,
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender {
     NSLog(@"登录通过");
     //    [self presenceStype:PresenceStyleAvailable];
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(qmXMPPLoginSuccess:)]) {
+        [_delegate qmXMPPLoginSuccess:sender];
+    }
+    
     XMPPPresence *presence = [XMPPPresence presence]; // type="available" is implicit
     [[self xmppStream] sendElement:presence];
 }
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error//
 {
     NSLog(@"登录失败 didNotAuthenticate:%@",error.description);
+    if (_delegate && [_delegate respondsToSelector:@selector(qmXMPPLoginFail:)]) {
+        [_delegate qmXMPPLoginFail:error];
+    }
+    
     [self disconnect];
 }
 

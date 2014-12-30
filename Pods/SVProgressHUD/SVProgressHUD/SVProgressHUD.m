@@ -265,7 +265,7 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
             SVProgressHUDErrorImage = [UIImage imageNamed:@"SVProgressHUD.bundle/error"];
         }
         SVProgressHUDRingThickness = 2;
-        SVProgressHUDDefaultMaskType = SVProgressHUDMaskTypeNone;
+        SVProgressHUDDefaultMaskType = SVProgressHUDMaskTypeGradient;
     }
 	
     return self;

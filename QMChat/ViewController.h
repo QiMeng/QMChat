@@ -13,6 +13,15 @@
 @interface ViewController : UIViewController <NSFetchedResultsControllerDelegate>
 {
     NSFetchedResultsController *fetchedResultsController;
+    
+    __weak IBOutlet UITextField *userNameTextField;
+    
+    __weak IBOutlet UITextField *passwordTextField;
+    
+    __weak IBOutlet UIButton *loginBtn;
+    
+    __weak IBOutlet UIButton *regisBtn;
+    
 }
 
 

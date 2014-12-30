@@ -8,8 +8,13 @@
 
 #import "ViewController.h"
 #import "QMXmpp.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <RACEXTScope.h>
+#import <SVProgressHUD.h>
 
-@interface ViewController ()
+
+
+@interface ViewController () <QMXmppDelegate>
 
 @end
 
@@ -18,16 +23,80 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    QMXmppShare.delegate = self;
+    
+    RAC(loginBtn,enabled) = [RACSignal combineLatest:@[userNameTextField.rac_textSignal,
+                                                       passwordTextField.rac_textSignal]
+                                              reduce:^(NSString *user, NSString * pwd){
+                                                  return  @(user.length > 0 && pwd.length > 0);
+                                              }];
 
-    //注册
-//    [QMXmppShare registrationXMPPUserName:@"Dawn2" password:@"1111"];
-    //登录
-    [QMXmppShare loginXMPPUserName:@"Dawn" password:@"1111"];
+    RAC(regisBtn,enabled) = [RACSignal combineLatest:@[userNameTextField.rac_textSignal,
+                                                       passwordTextField.rac_textSignal]
+                                              reduce:^(NSString *user, NSString * pwd){
+                                                  return  @(user.length > 0 && pwd.length > 0);
+                                              }];
+    
+    
+//    [self fetchedResultsController];
 //
-    [self fetchedResultsController];
-//
-    [self performSelector:@selector(getData) withObject:nil afterDelay:5];
+//    [self performSelector:@selector(getData) withObject:nil afterDelay:5];
 }
+
+#pragma mark - 登录
+- (IBAction)touchLogin:(id)sender {
+    [SVProgressHUD showWithStatus:@"正在登录..."];
+    [QMXmppShare loginXMPPUserName:userNameTextField.text password:passwordTextField.text];
+}
+
+#pragma mark - 注册
+- (IBAction)touchRegisterBtn:(id)sender {
+    [SVProgressHUD showWithStatus:@"正在注册..."];
+    [QMXmppShare registrationXMPPUserName:userNameTextField.text password:passwordTextField.text];
+    
+}
+
+/**
+ *  连接服务器失败
+ */
+- (void)qmXMPPConnectedFail:(id)sender{
+    [SVProgressHUD showErrorWithStatus:@"连接服务器失败"];
+}
+
+/**
+ *  登录成功
+ */
+- (void)qmXMPPLoginSuccess:(id)sender{
+    [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+    
+    
+    [self performSegueWithIdentifier:@"FriendsViewController" sender:nil];
+}
+
+/**
+ *  登录失败
+ */
+- (void)qmXMPPLoginFail:(id)sender{
+    [SVProgressHUD showErrorWithStatus:@"登录失败"];
+}
+
+/**
+ *  注册成功
+ */
+- (void)qmXMPPRegistrationSuccess:(id)sender{
+    [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+}
+
+/**
+ *  注册失败
+ */
+- (void)qmXMPPRegistrationFail:(id)sender{
+    [SVProgressHUD showErrorWithStatus:@"注册失败"];
+}
+
+
+
 
 - (void)getData{
 
