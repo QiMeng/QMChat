@@ -11,7 +11,8 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <RACEXTScope.h>
 #import <SVProgressHUD.h>
-
+#import <CoreData+MagicalRecord.h>
+#import "Test.h"
 @interface ViewController () <QMXmppDelegate>
 
 @end
@@ -36,6 +37,12 @@
                                                   return  @(user.length > 0 && pwd.length > 0);
                                               }];
 
+    
+    Test * test = [Test MR_createEntity];
+    
+    
+    
+    
 //    [self fetchedResultsController];
 //
 //    [self performSelector:@selector(getData) withObject:nil afterDelay:5];

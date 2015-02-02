@@ -17,6 +17,8 @@
 		FF6B21121A4D54BB00E00395 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF6B21101A4D54BB00E00395 /* LaunchScreen.xib */; };
 		FF6B211E1A4D54BB00E00395 /* QMChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FF6B211D1A4D54BB00E00395 /* QMChatTests.m */; };
 		FFAD4DF41A52379D0054C7F0 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFAD4DF31A52379D0054C7F0 /* FriendsViewController.m */; };
+		FFE07BB21A5BBFEC00993AE5 /* db.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFE07BB01A5BBFEC00993AE5 /* db.xcdatamodeld */; };
+		FFE07BB81A5BC06800993AE5 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE07BB71A5BC06800993AE5 /* Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,9 @@
 		FF6B211D1A4D54BB00E00395 /* QMChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QMChatTests.m; sourceTree = "<group>"; };
 		FFAD4DF21A52379D0054C7F0 /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
 		FFAD4DF31A52379D0054C7F0 /* FriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsViewController.m; sourceTree = "<group>"; };
+		FFE07BB11A5BBFEC00993AE5 /* db.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db.xcdatamodel; sourceTree = "<group>"; };
+		FFE07BB61A5BC06800993AE5 /* Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
+		FFE07BB71A5BC06800993AE5 /* Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +131,9 @@
 				FF6B21091A4D54BB00E00395 /* ViewController.m */,
 				FFAD4DF21A52379D0054C7F0 /* FriendsViewController.h */,
 				FFAD4DF31A52379D0054C7F0 /* FriendsViewController.m */,
+				FFE07BB01A5BBFEC00993AE5 /* db.xcdatamodeld */,
+				FFE07BB61A5BC06800993AE5 /* Test.h */,
+				FFE07BB71A5BC06800993AE5 /* Test.m */,
 				FF3A15BE1A4E4AB600DE0EA0 /* QMXMPP */,
 				FF6B210B1A4D54BB00E00395 /* Main.storyboard */,
 				FF6B210E1A4D54BB00E00395 /* Images.xcassets */,
@@ -300,7 +308,9 @@
 				FF6B210A1A4D54BB00E00395 /* ViewController.m in Sources */,
 				FF6B21071A4D54BB00E00395 /* AppDelegate.m in Sources */,
 				FF3A15C11A4E4B5800DE0EA0 /* QMXmpp.m in Sources */,
+				FFE07BB81A5BC06800993AE5 /* Test.m in Sources */,
 				FF6B21041A4D54BB00E00395 /* main.m in Sources */,
+				FFE07BB21A5BBFEC00993AE5 /* db.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +521,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FFE07BB01A5BBFEC00993AE5 /* db.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FFE07BB11A5BBFEC00993AE5 /* db.xcdatamodel */,
+			);
+			currentVersion = FFE07BB11A5BBFEC00993AE5 /* db.xcdatamodel */;
+			path = db.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FF6B20F61A4D54BB00E00395 /* Project object */;
 }
